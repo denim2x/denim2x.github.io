@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>International Telephone Input</title>
+    <meta name="description" content="Demo page for International Telephone Input. An Angular module for entering international telephone numbers.">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/intlTelInput.min.css">
+    <link rel="stylesheet" href="css/demo.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
+    <script src="js/zepto.min.js"></script>
+    <script src="js/intlTelInput.min.js"></script>
+    <script>
+      angular.
+        module('demo', ['intlTelInput']).
+        controller('main', ['intlTelInput', function (TelInput) {
+          TelInput.config(function () {
+            return {
+              utilsScript: "js/libphonenumber.min.js"
+            };
+          });
+        }]);
+    </script>
+  </head>
+
+  <body ng-app="demo">
+    <div id="wrapper">
+      <h1>International Telephone Input</h1>
+
+      <h3>What is it?</h3>
+      <p>A jQuery plugin for entering and validating international telephone numbers. It adds a flag dropdown to any input, which lists all the countries and their international dial codes next to their flags.</p>
+
+      <div ng-controller="main">
+        <h3>Demo</h3>
+        <input type="tel" international class="form-control">
+      </div>
+
+      <h3>Features</h3>
+      <ul>
+        <li>Automatically format the number as the user types</li>
+        <li>Automatically set the input placeholder to an example number for the selected country</li>
+        <li>Navigate the country dropdown by typing a country's name, or using up/down keys</li>
+        <li>Selecting a country from the dropdown will update the dial code in the input</li>
+        <li>Typing a different dial code automatically updates the displayed flag</li>
+        <li>Dropdown appears above or below the input depending on available space/scroll position</li>
+        <li>Lots of initialization options for customisation, as well as public methods for interaction</li>
+      </ul>
+
+      <h3>Examples</h3>
+      <ul>
+        <li>
+          <a href="html/is-valid-number.html">Validation</a>:
+          Use Google's libphonenumber for validation
+        </li>
+        <li>
+          <a href="html/default-country-ip.html">Lookup user's country</a>:
+          Use IP address lookup to set the default country to the user's country
+        </li>
+        <li>
+          <a href="html/national-mode.html">National mode</a>:
+          Use nationalMode option, but still extract full international numbers
+        </li>
+        <li>
+          <a href="html/country-sync.html">Country sync</a>:
+          Access the country data to create a separate country dropdown for an address form, and then listen for change events to keep the two dropdowns in sync
+        </li>
+        <li>
+          <a href="html/only-countries-europe.html">European countries</a>:
+          Only show European country codes
+        </li>
+        <li>
+          <a href="html/modify-country-data.html">Modify country data</a>:
+          Modify the data to only show localised country names
+        </li>
+        <li>
+          <a href="html/hidden-input.html">Hidden input</a>:
+          Submitting the full international number when in nationalMode
+        </li>
+      </ul>
+
+      <p class="actions">
+        <a class="btn btn-primary" href="https://github.com/denim2x/international-phone-number">View on Github</a>
+      </p>
+    </div>
+
+    <!-- fork me on github -->
+    <a href="https://github.com/denim2x/international-phone-number">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" alt="Fork me on GitHub"
+        src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+    </a>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-67725708-1', 'auto');ga('send', 'pageview');
+    </script>
+  </body>
+</html>

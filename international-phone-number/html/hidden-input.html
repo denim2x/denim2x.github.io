@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Example: Submitting the full international number when in nationalMode</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.css">
+    <link rel="stylesheet" href="../css/intlTelInput.min.css?1442427060379">
+    <link rel="stylesheet" href="../css/demo.css?1442427060379">
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
+    <script src="../js/zepto.min.js"></script>
+    <script src="../js/intlTelInput.min.js?1442427060379"></script>
+    <script src="../js/hiddenInput.js?1442427060379"></script>
+  </head>
+
+  <body ng-app="demo">
+    <a href="/intl-tel-input.html">Back</a>
+    <h1>Example: Submitting the full international number when in nationalMode</h1>
+    <p>If you&#39;re submitting the form using Ajax, simply use getNumber to get the number before sending it. If you&#39;re using the standard form POST method, you should use a separate hidden input which you update on submit to send the full international number. Try submitting a valid number below, and then check the &#39;phone-full&#39; parameter in the URL.</p>
+    
+    <h2>Markup</h2>
+    <pre><code class="language-markup">&lt;form&gt;
+  &lt;input type=&quot;tel&quot; name=&quot;phone&quot;&gt;
+  &lt;input id=&quot;hidden&quot; type=&quot;hidden&quot; name=&quot;phone-full&quot;&gt;
+  &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+    <h2>Code</h2>
+    <pre><code class="language-javascript">angular.
+  module(&#39;demo&#39;, [&#39;intlTelInput&#39;]).
+  controller(&#39;result&#39;, [&#39;$scope&#39;, &#39;intlTelInput&#39;, 
+    function ($scope) {
+      var input = $(&#39;[name=&quot;phone&quot;]&#39;), hidden = $(&quot;#hidden&quot;);
+      input.intlTelInput({
+        // just for formatting/placeholders etc
+        utilsScript: &quot;../js/libphonenumber.min.js&quot;
+      });
+
+      // update the hidden input on submit
+      $scope.submit = function () {
+        hidden.val(input.intlTelInput(&quot;getNumber&quot;));
+      };
+    }
+  ]);
+</code></pre>
+
+    <h2>Result</h2>
+    <div ng-controller="result">
+      <form ng-submit="submit()">
+  <input type="tel" name="phone">
+  <input id="hidden" type="hidden" name="phone-full">
+  <button type="submit">Submit</button>
+</form>
+    </div>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-67725708-1', 'auto');ga('send', 'pageview');
+    </script>
+  </body>
+</html>
